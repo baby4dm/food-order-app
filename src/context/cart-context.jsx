@@ -4,6 +4,8 @@ export const CartContext = createContext({
   items: [],
   addItem: (item) => {},
   removeItem: (id) => {},
+  setCheckouted: (value) => {},
+  isCheckouted: false,
 });
 
 function cartReducer(state, action) {
@@ -35,6 +37,10 @@ function cartReducer(state, action) {
     return { ...state, items: updatedItems };
   }
 
+  if (action.type === "CHECKOUT") {
+    return { ...state, isCheckouted: action.value };
+  }
+
   return state;
 }
 
@@ -47,14 +53,20 @@ export function CartContextProvider({ children }) {
     items: cart.items,
     addItem,
     removeItem,
+    isCheckouted: cart.isCheckouted,
+    setCheckouted,
   };
+
+  function setCheckouted(value) {
+    dispatchCartAction({ type: "CHECKOUT", value });
+  }
 
   function addItem(item) {
     dispatchCartAction({ type: "ADD_ITEM", item });
   }
 
   function removeItem(id) {
-    dispatchCartAction("REMOVE_ITEM", id);
+    dispatchCartAction({ type: "REMOVE_ITEM", id });
   }
   return (
     <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>

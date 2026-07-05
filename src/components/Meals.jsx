@@ -15,7 +15,6 @@ export default function Meals() {
           throw new Error("Error with fetching data, please try again later!");
         }
         const data = await response.json();
-        console.log(data);
         setMeals(data);
       } catch (error) {
         setError({ message: error.message });

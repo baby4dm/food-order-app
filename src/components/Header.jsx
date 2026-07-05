@@ -3,6 +3,8 @@ import logo from "../assets/logo.jpg";
 import Button from "./UI/Button";
 import { CartContext } from "../context/cart-context";
 import Modal from "./Modal";
+import Cart from "./Cart";
+import Checkout from "./Checkout";
 
 export default function Header() {
   const cartRef = useRef();
@@ -28,7 +30,10 @@ export default function Header() {
         </Button>
       </nav>
       <Modal ref={cartRef}>
-        <h2>Cart is empty</h2>
+        {!cartContext.isCheckouted && (
+          <Cart onClose={() => cartRef.current.closeModal()} />
+        )}
+        {cartContext.isCheckouted && <Checkout />}
       </Modal>
     </header>
   );
