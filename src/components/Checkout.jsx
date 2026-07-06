@@ -20,8 +20,8 @@ function validateData(data) {
   if (data.street.trim().length === 0) {
     errors.push("Street should not be empty");
   }
-  if (data["postal-code"].length !== 5) {
-    errors.push("Postal code should includes 5 digits");
+  if (!/^\d{5}$/.test(data["postal-code"])) {
+    errors.push("Postal code must contain exactly 5 digits");
   }
   if (data.city.trim().length === 0) {
     errors.push("City should not be empty");
@@ -118,7 +118,6 @@ export default function Checkout({ onClose }) {
           <Input
             name="postalCode"
             label="PostalCode"
-            type="number"
             defaultValue={formState?.postalCode}
           />
           <Input name="city" label="City" defaultValue={formState?.city} />

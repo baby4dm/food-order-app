@@ -3,7 +3,7 @@ import { useImperativeHandle, useRef } from "react";
 import { createPortal } from "react-dom";
 import { CartContext } from "../context/cart-context";
 
-export default function Modal({ children, ref, cssClasses }) {
+export default function Modal({ children, ref, cssClasses = "" }) {
   const dialog = useRef();
   const cartContext = use(CartContext);
   useImperativeHandle(ref, () => {

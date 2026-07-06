@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Error from "./Error";
+import ErrorMessage from "./Error";
 import Meal from "./Meal";
 
 export default function Meals() {
@@ -27,7 +27,7 @@ export default function Meals() {
   }, []);
 
   if (error) {
-    return <Error title="Error occured" description={error.message} />;
+    return <ErrorMessage title="Error occured" description={error.message} />;
   }
 
   return (

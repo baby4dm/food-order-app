@@ -12,7 +12,7 @@ export default function Meal({ meal }) {
   return (
     <div className="meal-item">
       <article>
-        <img src={"http://localhost:3000/" + meal.image} alt={name} />
+        <img src={"http://localhost:3000/" + meal.image} alt={meal.name} />
         <div>
           <h3>{meal.name}</h3>
           <p className="meal-item-price">

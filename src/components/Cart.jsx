@@ -1,11 +1,11 @@
-import { useContext } from "react";
 import Button from "./UI/Button";
 import { CartContext } from "../context/cart-context";
 import CartItem from "./CartItem";
 import { currencyFormatter } from "../util/formatting";
+import { use } from "react";
 
 export default function Cart({ onClose }) {
-  const cartContext = useContext(CartContext);
+  const cartContext = use(CartContext);
   const totalPrice = cartContext.items.reduce((totalPrice, item) => {
     return totalPrice + item.price * item.quantity;
   }, 0);
