@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 
 export const CartContext = createContext({
   items: [],
@@ -23,7 +23,6 @@ function cartReducer(state, action) {
     } else {
       updatedItems.push({ ...action.item, quantity: 1 });
     }
-
     return { ...state, items: updatedItems };
   }
   if (action.type === "REMOVE_ITEM") {
@@ -54,8 +53,12 @@ function cartReducer(state, action) {
 
 export function CartContextProvider({ children }) {
   const [cart, dispatchCartAction] = useReducer(cartReducer, {
-    items: [],
+    items: JSON.parse(localStorage.getItem("items")) ?? [],
   });
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(cart.items));
+  }, [cart.items]);
 
   const cartContext = {
     items: cart.items,
