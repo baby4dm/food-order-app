@@ -33,7 +33,9 @@ export default function Header() {
         {!cartContext.isCheckouted && (
           <Cart onClose={() => cartRef.current.closeModal()} />
         )}
-        {cartContext.isCheckouted && <Checkout />}
+        {cartContext.isCheckouted && (
+          <Checkout onClose={cartRef.current.closeModal} />
+        )}
       </Modal>
     </header>
   );
